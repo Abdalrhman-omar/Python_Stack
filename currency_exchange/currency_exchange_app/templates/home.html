@@ -1,144 +1,258 @@
 {% extends "base.html" %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/highcharts.css' %}">
 {% block content %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<main class="row">
-    <div class="col-4">
-        <canvas id="myChart" ></canvas>
-        <canvas id="myChart1"></canvas>
-    </div>
+<div class="bg-secondary">
 
-    <div  class="col-4 ">
-        <img src={% static "img/infograph.jpg" %} width="450px">
-    </div>
-    <div class=" col-4">
-        <canvas id="myChart2"></canvas>
-        <canvas id="myChart3"></canvas>
-    </div>
-</main>
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+      <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <figure class="highcharts-figure" >
+            <div id="usd_ils"></div>
+        </figure>
+      </div>
+      <div class="carousel-item">
+          <figure class="highcharts-figure">
+            <div id="gbp_ils"></div>
+          </figure>
+      </div>
+      <div class="carousel-item">
+          <figure class="highcharts-figure">
+            <div id="jpy_ils"></div>
+          </figure>
 
-<div class="row"> 
-    <div class="col-12">
-        <table class="table table-dark">
-            <thead>
-                <tr>
-                    <th scope="col">unit</th>
-                    <th scope="col">Currency</th>
-                    <th scope="col">Base</th>
-                    <th scope="col">Rate</th>
-                    <th scope="col">Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">$</th>
-                    <td>USD</td>
-                    <td>ILS</td>
-                    <td>3.25</td>
-                    <td>12/23/2020</td>
-                </tr>
-                <tr>
-                    <th scope="row">د.ا</th>
-                    <td>JOD</td>
-                    <td>ILS</td>
-                    <td>4.58</td>
-                    <td>12/23/2020</td>
-                </tr>
-                <tr>
-                    <th scope="row">€</th>
-                    <td>EUR</td>
-                    <td>ILS</td>
-                    <td>3.97</td>
-                    <td>12/23/2020</td>
-                </tr>
-                <tr>
-                    <th scope="row">¥</th>
-                    <td>JPY</td>
-                    <td>ILS</td>
-                    <td>0.031</td>
-                    <td>12/23/2020</td>
-                </tr>
-                <tr>
-                    <th scope="row">£</th>
-                    <td>GBP</td>
-                    <td>ILS</td>
-                    <td>4.31</td>
-                    <td>12/23/2020</td>
-                </tr>
-            </tbody>
-        </table>
+      </div>
     </div>
+    <a class="carousel-control-prev" href="#myCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#myCarousel" role="button" data-bs-slide="next" style="height: 200px; margin-top: 150px">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+  </div>
+
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+      <div class="col-lg-4">
+        <img height="175px" src="{% static 'img/usd.png' %}">
+
+        <h2 class="text-light">Competitive Rates</h2>
+        <p class="text-light">Enjoy the convenience of online banking without the bank's exorbitant rates and fees.</p><br>
+        <p><a class="btn btn-secondary btn-outline-warning text-warning" href="#" role="button">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img height="175px" src="{% static 'img/secure.png' %}">
+        <h2 class="text-light" >Safe  and  Secure</h2>
+        <p class="text-light">We use top level encryption to protect your account information and monitor your account activity to help identify unauthorized transactions.</p>
+        <p><a class="btn btn-secondary btn-outline-warning text-warning" href="#" role="button">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img height="175px" src="{% static 'img/creditCard.png' %}">
+        <h2 class="text-light">All Major Debit Cards</h2>
+        <p class="text-light">Use your debit card effortlessly to process payment and receive funds  instantly. We exchange for all five major currencies including USD, EUR, JOD, ILS and JPY.</p>
+        <p><a class="btn btn-secondary btn-outline-warning text-warning" href="#" role="button">View details &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+    <!-- START THE FEATURETTES -->
+    <hr class="featurette-divider">
+    <hr class="featurette-divider">
+    <!-- /END THE FEATURETTES -->
+  </div><!-- /.container -->
+
+
 </div>
-<script>
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var chart = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'line',
-    // The data for our dataset
-    data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            label: 'USD price over time',
-            borderColor: 'gold',
-            data: [35, 45, 40, 60, 40, 30, 45]
-        }]
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/data.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+  <script>
+        Highcharts.chart('usd_ils', {
+    chart: {
+        zoomType: 'x'
     },
-    // Configuration options go here
-    options: {}
-});
-</script>
-    <script>
-        var ctx = document.getElementById('myChart1').getContext('2d');
-        var chart = new Chart(ctx, {
-        // The type of chart we want to create
-        type: 'line',
-        // The data for our dataset
-        data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [{
-                label: 'USD price over time',
-                borderColor: 'gold',
-                data: [0, 10, 55, 30, 20, 100, 45]
-            }]
-        },
-        // Configuration options go here
-        options: {}
-    });
-    </script>
-        <script>
-            var ctx = document.getElementById('myChart2').getContext('2d');
-            var chart = new Chart(ctx, {
-            // The type of chart we want to create
-            type: 'line',
-            // The data for our dataset
-            data: {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'USD price over time',
-                    borderColor: 'gold',
-                    data: [0, 10, 5, 100, 20, 30, 45]
-                }]
-            },
-            // Configuration options go here
-            options: {}
-        });
-        </script>
-            <script>
-                var ctx = document.getElementById('myChart3').getContext('2d');
-                var chart = new Chart(ctx, {
-                // The type of chart we want to create
-                type: 'line',
-                // The data for our dataset
-                data: {
-                    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                    datasets: [{
-                        label: 'USD price over time',
-                        borderColor: 'gold',
-                        data: [100, 70, 80, 60, 40, 50, 45]
-                    }]
+    title: {
+        text: 'USD to ILS exchange rate over time'
+    },
+    subtitle: {
+        text: document.ontouchstart === undefined ?
+            'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+    },
+    xAxis: {
+        type: 'datetime'
+    },
+    yAxis: {
+        title: {
+            text: 'Exchange rate'
+        }
+    },
+    legend: {
+        enabled: false
+    },
+    plotOptions: {
+        area: {
+            fillColor: {
+                linearGradient: {
+                    x1: 0,
+                    y1: 0,
+                    x2: 0,
+                    y2: 1
                 },
-                // Configuration options go here
-                options: {}
-            });
-            </script>
+                stops: [
+                    [0, Highcharts.getOptions().colors[1]],
+                    [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                ]
+            },
+            marker: {
+                radius: 2
+            },
+            lineWidth: 1,
+            states: {
+                hover: {
+                    lineWidth: 1
+                }
+            },
+            threshold: null
+        }
+    },
+
+
+  series: [{
+        type: 'area',
+        name: 'USD to EUR',
+        data: {{list1}}
+  }]});
+
+
+
+         Highcharts.chart('jpy_ils', {
+        chart: {
+            zoomType: 'x'
+        },
+        title: {
+            text: 'JPY to ILS exchange rate over time'
+        },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: 'Exchange rate'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[1]],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
+      series: [{
+            type: 'area',
+            name: 'USD to EUR',
+            data: {{list2}}
+      }]});
+
+
+
+
+
+          Highcharts.chart('gbp_ils', {
+        chart: {
+            zoomType: 'x'
+        },
+        title: {
+            text: 'GBP to ILS exchange rate over time'
+        },
+        subtitle: {
+            text: document.ontouchstart === undefined ?
+                'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+            title: {
+                text: 'Exchange rate'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        plotOptions: {
+            area: {
+                fillColor: {
+                    linearGradient: {
+                        x1: 0,
+                        y1: 0,
+                        x2: 0,
+                        y2: 1
+                    },
+                    stops: [
+                        [0, Highcharts.getOptions().colors[1]],
+                        [1, Highcharts.color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                    ]
+                },
+                marker: {
+                    radius: 2
+                },
+                lineWidth: 1,
+                states: {
+                    hover: {
+                        lineWidth: 1
+                    }
+                },
+                threshold: null
+            }
+        },
+      series: [{
+            type: 'area',
+            name: 'USD to EUR',
+            data: {{list3}}
+      }]});
+</script>
+</html>
+
 {% endblock content %}
